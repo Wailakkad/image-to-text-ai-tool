@@ -64,6 +64,12 @@ const Register  = async (req, res) => {
 }
 const logout = async (req, res) => {
     try{
+        res.cleaarCookie("jwtoken" , {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+        });
+        res.status(200).json({message : "User logout successfully"})
 
     }catch(err){
         console.log("Error : " , err)
