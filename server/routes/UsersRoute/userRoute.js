@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const {logout , Register , Login} = require('../../controller/authController/auth');
 
-router.post('/analyze-and-post', async (req, res) => {
-    
-});
+router.post('/login', Login);
+router.post('/register', Register);
+router.get('/logout', logout);
 
 
-export default router;
+module.exports = router;

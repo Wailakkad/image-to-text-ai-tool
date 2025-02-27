@@ -1,4 +1,4 @@
-const User = require("../authController/auth");
+const User = require("../../database/models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -77,4 +77,4 @@ const logout = async (req, res) => {
 }
 
 
-module.exports = {Login, Register};
+module.exports = {Login, Register, logout};
