@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors"); 
 const analyzeRoutes = require("./routes/analyzeRoutes");
+const connectDB = require("./database/connection");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/api", analyzeRoutes);
 
 
 const PORT = process.env.PORT || 5000;
+connectDB();
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
