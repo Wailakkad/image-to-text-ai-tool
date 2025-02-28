@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ImageGenerator from './pages/ImageGenerator';
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from './pages/RegisterPage';
@@ -18,6 +19,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/signup' element={<RegisterPage/>}/>
       </Routes>
+      <Footer />
     </Router>
   );
 }
