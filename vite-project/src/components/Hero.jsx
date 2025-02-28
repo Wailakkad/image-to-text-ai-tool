@@ -1,30 +1,64 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import IMG from '../images/photo.png';
 
 const Hero = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1 } }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen ">
-      <h1 className="text-5xl font-bold text-white mb-4">
-        Investments/Cypris Finance
-      </h1>
-      <p className="text-xl text-white mb-8 text-center">
-        Innovative Crypto Financial Solutions For Any Investment Challenge
-      </p>
-      <p className="text-lg text-white mb-8 text-center">
-        We Bank Just Focus On Investments. We Cover Your Estate Financial
-        Songvision, From Resigning To Statements.
-      </p>
-      <div className="flex space-x-4">
-        <button  className=" px-4 py-2 rounded border-[3px] border-white font-bold text-white">
-          <Link to="/image">Get Started</Link>
-        </button>
-      
+    <section className="relative min-h-screen py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="w-full lg:w-1/2">
+          <motion.h1
+            className="text-6xl font-bold text-white mb-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            AI-Powered Image to Text
+          </motion.h1>
+          <motion.p
+            className="text-xl text-gray-300 mb-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            Transform images into accurate, editable text effortlessly.
+          </motion.p>
+          <div className="flex space-x-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="px-8 py-4 bg-black text-white font-bold rounded-lg hover:bg-blue-700"
+            >
+              <Link to="/image">Get Started</Link>
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="px-8 py-4 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300"
+            >
+              Try Demo
+            </motion.button>
+          </div>
+        </div>
+        <div className="w-full lg:w-1/2 mt-10 lg:mt-0">
+          <motion.img
+            src={IMG}
+            alt="App Preview"
+            className="w-full h-auto rounded-lg "
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          />
+        </div>
       </div>
-      <p className="text-sm text-gray-500 mt-8 text-center">
-        We Use Cookies And Other Technology to Provide You With Our Services Part for Functional
-        Decline Except Accepted and Advertising purposes. Please Read Our Privacy Policy for More Information
-      </p>
-    </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4 z-10 text-center text-gray-400 text-sm">
+        <p>Millions of images processed | AI-powered accuracy 98%</p>
+      </div>
+    </section>
   );
 };
 

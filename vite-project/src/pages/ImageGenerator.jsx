@@ -34,7 +34,7 @@ const ImageGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 transition-colors duration-500 py-20">
+    <div className="min-h-screen flex flex-col items-center p-4  transition-colors duration-500 py-20">
       <div className='flex flex-col items-center gap-8'>
         <h1 className="text-6xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-500">Image Generator</h1>
         <div className="flex items-center w-full max-w-md">
@@ -59,8 +59,8 @@ const ImageGenerator = () => {
         </div>
       )}
       {Description && (
-        <div className="mt-8 animate-fadeIn">
-          <h1>{Description}</h1>
+        <div className="mt-8 animate-fadeIn max-w-[600px] h-auto p-12 bg-black">
+          <h1 className='text-white font-bold'>{Description}</h1>
         </div>
       )}
     </div>

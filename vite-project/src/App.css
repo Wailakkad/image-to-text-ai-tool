@@ -3,8 +3,9 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: black;
+  background: linear-gradient(to bottom, #ff7f00, #000000);
 }
+
 html, body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
