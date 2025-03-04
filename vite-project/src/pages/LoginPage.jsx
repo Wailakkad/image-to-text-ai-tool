@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', { email, password });
+      console.log('Login successful:', response.data);
+      // Set login status in localStorage
+      localStorage.setItem('isLoggedIn', 'true');
+      // Navigate to the dashboard upon successful login
+      navigate('/image');
+    } catch (error) {
+      console.error('Error logging in:', error.response?.data?.error || error.message);
+      // Handle login error (e.g., show error message to the user)
+    }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen"> {/* Added light gray background */}
-      <div className="bg-black p-10 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3"> {/* Increased form width */}
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-black p-10 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
         <h1 className="text-3xl font-bold text-white mb-6 text-center">Welcome back!</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

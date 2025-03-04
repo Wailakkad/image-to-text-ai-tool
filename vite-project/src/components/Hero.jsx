@@ -1,9 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import IMG from '../images/photo.png';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      navigate('/image');
+    } else {
+      navigate('/login');
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1 } }
@@ -33,8 +44,9 @@ const Hero = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               className="px-8 py-4 bg-black text-white font-bold rounded-lg hover:bg-blue-700"
+              onClick={handleGetStarted}
             >
-              <Link to="/image">Get Started</Link>
+              Get Started
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
