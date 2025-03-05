@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, 
   ImageIcon, 
@@ -10,57 +10,71 @@ import {
   Settings
 } from 'lucide-react';
 
+// Define constants for dropdown options
+const socialPlatforms = ['Instagram', 'Twitter', 'LinkedIn', 'Facebook', 'TikTok'];
+const socialTones = ['casual', 'humorous', 'inspirational', 'professional'];
+const ecommerceDescriptionTypes = ['sales pitch', 'technical specification', 'storytelling'];
+const ecommerceTargetAudiences = ['general consumers', 'tech enthusiasts', 'fashion lovers', 'home decor lovers'];
+const ecommerceTones = ['professional', 'casual', 'luxurious'];
+
+const options = [
+  { value: 'social', label: 'Social Media', icon: Layers },
+  { value: 'ecommerce', label: 'E-commerce', icon: Sparkles }
+];
+
 const ImageGenerator = () => {
-  const [imageUrl, setImageUrl] = useState('');
-  const [descriptions, setDescriptions] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('social');
-  const [copiedIndex, setCopiedIndex] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
-  
-  // New state for advanced parameters
-  const [advancedParams, setAdvancedParams] = useState({
-    social: {
-      platform: 'Instagram',
-      tone: 'casual',
-      includeEmojis: true,
-      customHashtags: ''
-    },
-    ecommerce: {
-      descriptionType: 'sales pitch',
-      targetAudience: 'general consumers',
-      tone: 'professional'
-    }
+  const [imageUrl, setImageUrl] = useState(() => {
+    return localStorage.getItem('imageUrl') || '';
   });
-  
-  // New state to toggle advanced parameters view
+  const [descriptions, setDescriptions] = useState(() => {
+    return JSON.parse(localStorage.getItem('descriptions')) || null;
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(() => {
+    return localStorage.getItem('selectedOption') || 'social';
+  });
+  const [copiedIndex, setCopiedIndex] = useState(null);
+  const [previewImage, setPreviewImage] = useState(() => {
+    return localStorage.getItem('previewImage') || null;
+  });
+  const [advancedParams, setAdvancedParams] = useState(() => {
+    const storedParams = localStorage.getItem('advancedParams');
+    return storedParams ? JSON.parse(storedParams) : {
+      social: {
+        platform: 'Instagram',
+        tone: 'casual',
+        includeEmojis: true,
+        customHashtags: ''
+      },
+      ecommerce: {
+        descriptionType: 'sales pitch',
+        targetAudience: 'general consumers',
+        tone: 'professional'
+      }
+    };
+  });
   const [showAdvancedParams, setShowAdvancedParams] = useState(false);
 
-  const options = [
-    { value: 'social', label: 'Social Media', icon: Layers },
-    { value: 'ecommerce', label: 'E-commerce', icon: Sparkles }
-  ];
+  // Save to localStorage whenever state changes
+  useEffect(() => {
+    localStorage.setItem('imageUrl', imageUrl);
+  }, [imageUrl]);
 
-  const socialPlatforms = [
-    'Instagram', 'Twitter', 'LinkedIn', 'Facebook', 'TikTok'
-  ];
+  useEffect(() => {
+    localStorage.setItem('descriptions', JSON.stringify(descriptions));
+  }, [descriptions]);
 
-  const socialTones = [
-    'casual', 'humorous', 'inspirational', 'professional'
-  ];
+  useEffect(() => {
+    localStorage.setItem('selectedOption', selectedOption);
+  }, [selectedOption]);
 
-  const ecommerceDescriptionTypes = [
-    'sales pitch', 'technical specification', 'storytelling'
-  ];
+  useEffect(() => {
+    localStorage.setItem('previewImage', previewImage);
+  }, [previewImage]);
 
-  const ecommerceTargetAudiences = [
-    'general consumers', 'tech enthusiasts', 
-    'fashion lovers', 'home decor lovers'
-  ];
-
-  const ecommerceTones = [
-    'professional', 'casual', 'luxurious'
-  ];
+  useEffect(() => {
+    localStorage.setItem('advancedParams', JSON.stringify(advancedParams));
+  }, [advancedParams]);
 
   const handleGenerateDescription = async () => {
     if (!imageUrl) {
@@ -73,7 +87,7 @@ const ImageGenerator = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/analyze-and-post', {
+      const response = await fetch('http://localhost:5000/api/analyze-image', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -110,6 +124,7 @@ const ImageGenerator = () => {
     setCopiedIndex(text);
     setTimeout(() => setCopiedIndex(null), 2000);
   };
+  
 
   const renderAdvancedParams = () => {
     const params = selectedOption === 'social' 

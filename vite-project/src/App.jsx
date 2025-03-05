@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import ImageGenerator from './pages/ImageGenerator';
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from './pages/RegisterPage';
+import Bulkpage from './pages/Bulkpage';
 import './App.css';
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/image' element={<ImageGenerator/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/signup' element={<RegisterPage/>}/>
+        <Route path='/bulk' element={<Bulkpage/>}/>
       </Routes>
       <Footer />
     </Router>

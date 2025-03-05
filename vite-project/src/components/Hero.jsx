@@ -8,11 +8,9 @@ const Hero = () => {
 
   const handleGetStarted = () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') {
+ 
       navigate('/image');
-    } else {
-      navigate('/login');
-    }
+   
   };
 
   const containerVariants = {
