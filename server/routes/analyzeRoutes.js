@@ -4,13 +4,13 @@ const { analyzeImage } = require("../services/analyzeService");
 // const { postToInstagram } = require("../services/instagramService");
 
 router.post("/analyze-and-post", async (req, res) => {
-    const { image_url } = req.body;
+    const { image_url , option } = req.body;
 
-    if (!image_url) {
-        return res.status(400).json({ error: "Image URL is required" });
+    if (!image_url || !option) {
+        return res.status(400).json({ error: "somme info is required" });
     }
 
-    const description = await analyzeImage(image_url);
+    const description = await analyzeImage(image_url , option);
 
     if (!description) {
         return res.status(500).json({ error: "Failed to analyze image" });

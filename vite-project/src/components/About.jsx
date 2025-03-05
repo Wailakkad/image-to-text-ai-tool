@@ -10,10 +10,10 @@ const About = () => {
   };
 
   return (
-    <section className="bg-white py-20"> {/* Changed background to white */}
+    <section className="bg-black py-20"> {/* Changed background to white */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
-          className="text-4xl font-bold mb-6 text-center text-gray-800" 
+          className="text-4xl font-bold mb-6 text-center text-white" 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -28,10 +28,10 @@ const About = () => {
         >
           Our SaaS platform leverages advanced AI models to transform images into highly accurate text descriptions in seconds.  Simply upload an image, and our AI will handle the rest, benefiting content creators, businesses, e-commerce sellers, and digital marketers alike.
         </motion.p>
-        <div className="flex justify-center"> {/* Center the buttons */}
+        <div className="flex justify-center"> 
           <motion.button
             whileHover={{ scale: 1.05 }}
-            className="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 mr-4"
+            className="px-8 py-4 bg-white text-black font-bold rounded-lg hover:bg-orange mr-4"
           >
             <Link to="/image">Try it Now</Link> {/* Call to action button */}
           </motion.button>
