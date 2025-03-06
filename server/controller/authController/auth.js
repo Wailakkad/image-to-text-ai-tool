@@ -1,4 +1,4 @@
-const User = require("../../database/models/User");
+const Users = require("../../database/Users");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -8,7 +8,7 @@ const Login  = async (req, res) => {
         return res.status(400).json({error : "Please fill all the fields"})
        }
     try{
-        const user = await User.findOne({email : email});
+        const user = await Users.findOne({email : email});
         if(!user){
             return res.status(400).json({error : "Invalid Credentials"})
         }else{
@@ -32,36 +32,59 @@ const Login  = async (req, res) => {
     }
 }
 
-const Register  = async (req, res) => {
-    const {name, email, password} = req.body;
-    if(!name || !email || !password){
-        return res.status(422).json({error : "Please fill all the fields"})
+const Register = async (req, res) => {
+    const { username, email, password } = req.body;
+  
+    // Validate input
+    if (!username || !email || !password) {
+      return res.status(422).json({ error: "Please fill all the fields" });
     }
-    try{
-        const user = await User.findOne({email : email});
-        if(user){
-            return res.status(422).json({error : "User already exists"})
-        }
-        const HashPassword = await bcrypt.hash(password, 12);
-        const newUser = new User({
-            name,
-            email,
-            password : HashPassword
-        });
-        await newUser.save();
-        const token = jwt.sign({_id : newUser._id}, process.env.JWT_SECRET);
-        res.cookie("jwtoken", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-            maxAge: 24 * 60 * 60 * 1000,
-          });
-        res.status(201).json({message : "User registered successfully"})
-
-    }catch(err){
-        console.log("Error : " , err)
+    try {
+      // Check if user already exists
+      const user = await Users.findOne({ email: email });
+      if (user) {
+        return res.status(422).json({ error: "User already exists" });
+      }
+  
+      // Hash password
+      const HashPassword = await bcrypt.hash(password, 12);
+  
+      // Create new user
+      const newUser = new Users({
+        username,
+        email,
+        password: HashPassword,
+      });
+  
+      // Save user to database
+      await newUser.save();
+      console.log("User saved successfully:", newUser);
+  
+      // Generate JWT token
+      const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET);
+  
+      // Set cookie
+      res.cookie("jwtoken", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
+  
+      // Send success response
+      res.status(201).json({ message: "User registered successfully" });
+    } catch (err) {
+      console.log("Error:", err);
+  
+      // Handle duplicate key error
+      if (err.code === 11000) {
+        return res.status(422).json({ error: "User already exists" });
+      }
+  
+      // Handle other errors
+      res.status(500).json({ error: "Internal server error" });
     }
-}
+  };
 const logout = async (req, res) => {
     try{
         res.cleaarCookie("jwtoken" , {

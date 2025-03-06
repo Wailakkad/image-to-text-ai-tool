@@ -7,6 +7,7 @@ import ImageGenerator from './pages/ImageGenerator';
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from './pages/RegisterPage';
 import Bulkpage from './pages/Bulkpage';
+import Resources from './components/Ressources';
 import './App.css';
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/signup' element={<RegisterPage/>}/>
         <Route path='/bulk' element={<Bulkpage/>}/>
+        <Route path='/ressources' element={<Resources/>}/>
       </Routes>
       <Footer />
     </Router>

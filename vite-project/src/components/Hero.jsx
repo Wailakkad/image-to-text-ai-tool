@@ -9,7 +9,7 @@ const Hero = () => {
   const handleGetStarted = () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
  
-      navigate('/image');
+      navigate('/ressources');
    
   };
 

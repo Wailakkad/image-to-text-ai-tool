@@ -9,7 +9,7 @@ const Navbar = () => {
       </div>
       <ul className="flex space-x-6">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/resource">Resource</Link></li>
+        <li><Link to="/ressources">Resource</Link></li>
        
         <li><Link to="/faq">FAQ</Link></li>
         <li><Link to="/protection">Protection</Link></li>

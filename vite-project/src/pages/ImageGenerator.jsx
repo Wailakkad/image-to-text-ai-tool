@@ -76,6 +76,35 @@ const ImageGenerator = () => {
     localStorage.setItem('advancedParams', JSON.stringify(advancedParams));
   }, [advancedParams]);
 
+  const HandleClair = () => {
+    // Clear local storage
+    localStorage.removeItem('imageUrl');
+    localStorage.removeItem('descriptions');
+    localStorage.removeItem('selectedOption');
+    localStorage.removeItem('previewImage');
+    localStorage.removeItem('advancedParams');
+
+    // Reset state variables
+    setImageUrl('');
+    setDescriptions(null);
+    setSelectedOption('social');
+    setPreviewImage(null);
+    setAdvancedParams({
+      social: {
+        platform: 'Instagram',
+        tone: 'casual',
+        includeEmojis: true,
+        customHashtags: ''
+      },
+      ecommerce: {
+        descriptionType: 'sales pitch',
+        targetAudience: 'general consumers',
+        tone: 'professional'
+      }
+    });
+    setShowAdvancedParams(false);
+  };
+
   const handleGenerateDescription = async () => {
     if (!imageUrl) {
       alert('Please enter an image URL');
@@ -267,7 +296,7 @@ const ImageGenerator = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 transition-all duration-500">
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl p-8 space-y-6 transform transition-transform hover:scale-[1.01]">
+      <div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl p-8 space-y-6 transform transition-transform hover:scale-[1.01]">
         <div className="flex items-center justify-center  mb-6">
           <ImageIcon className="text-white w-10 h-10" />
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-orange-300 p-6">
@@ -304,12 +333,12 @@ const ImageGenerator = () => {
               </div>
 
               <button
-          onClick={handleGenerateDescription}
-          disabled={isLoading}
-          className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-lg hover:from-orange-600 hover:to-white transition-all disabled:opacity-50"
-        >
-          {isLoading ? 'Generating...' : 'Generate'}
-        </button>
+                onClick={handleGenerateDescription}
+                disabled={isLoading}
+                className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-lg hover:from-orange-600 hover:to-white transition-all disabled:opacity-50"
+              >
+                {isLoading ? 'Generating...' : 'Generate'}
+              </button>
             </div>
 
             {/* Advanced Parameters Toggle */}
@@ -371,7 +400,7 @@ const ImageGenerator = () => {
 
           {/* Right Side - Image Preview */}
           {previewImage && (
-            <div className="w-1/3 flex flex-col items-center">
+            <div className="w-2/3 flex flex-col items-center">
               <div className="border-4 border-blue-200 rounded-lg overflow-hidden shadow-lg">
                 <img 
                   src={previewImage} 
@@ -386,6 +415,9 @@ const ImageGenerator = () => {
               <div className="mt-4 flex items-center text-gray-600 dark:text-gray-300">
                 <Image className="mr-2" />
                 <span>Image Preview</span>
+              </div>
+              <div className='mt-4'>
+                <button onClick={HandleClair} className='bg-orange-700 text-black p-2 rounded-xl w-[100px] cursor-pointer'> Clear All </button>
               </div>
             </div>
           )}
