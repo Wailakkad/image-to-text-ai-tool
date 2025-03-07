@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from './pages/RegisterPage';
 import Bulkpage from './pages/Bulkpage';
 import Resources from './components/Ressources';
+import TextToImage from './pages/TextToImage';
+import HashtagGenerator from './pages/Hastags';
 import './App.css';
 
 
@@ -23,6 +25,8 @@ function App() {
         <Route path='/signup' element={<RegisterPage/>}/>
         <Route path='/bulk' element={<Bulkpage/>}/>
         <Route path='/ressources' element={<Resources/>}/>
+        <Route path='/imageGenerator' element={<TextToImage/>}/>
+        <Route path='/hastags' element={<HashtagGenerator/>}/>
       </Routes>
       <Footer />
     </Router>

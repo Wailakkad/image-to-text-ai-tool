@@ -16,7 +16,15 @@ const Resources = () => {
       "description": "Process multiple images at once to save time. Perfect for e-commerce stores with large product catalogs.",
       "icon": "Images",
       "link": "bulk"
-    }
+    },
+    {
+        "id": 3,
+        "name": "Ai Image Generator",
+        "description": "Generate compelling descriptions for your social media images or e-commerce product photos with our advanced AI tool.",
+        "icon": "Image",
+        "link": "imageGenerator"
+       
+      }
   ];
 
   return (

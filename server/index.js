@@ -9,8 +9,10 @@ const analyzeRoutes = require("./routes/analyzeRoutes");
 const connectDB = require("./database/connection");
 const authRouter = require("./routes/UsersRoute/userRoute");
 const textToImageRoutes = require("./routes/Text-to-image");
+const Hashtags = require("./routes/Hashtags");
 
 const app = express();
+
 
 app.use(bodyParser.json());
 app.use(cors()); 
@@ -28,6 +30,7 @@ const storage = multer.diskStorage({
   }
 });
 
+
 const upload = multer({ storage });
 
 // Create uploads directory for storing generated images
@@ -43,6 +46,7 @@ app.use('/uploads', express.static(uploadsDir));
 app.use("/api", analyzeRoutes);
 app.use("/api", authRouter);
 app.use("/api", textToImageRoutes);
+app.use("/api", Hashtags);
 
 const PORT = process.env.PORT || 5000;
 connectDB();
