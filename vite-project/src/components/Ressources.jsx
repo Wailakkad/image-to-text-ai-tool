@@ -2,30 +2,36 @@ import React from 'react';
 import { ArrowUpRight, Image, Images } from 'lucide-react';
 
 const Resources = () => {
-  const Tools = [
-    {
-      "id": 1,
-      "name": "AI Image Description",
-      "description": "Generate compelling descriptions for your social media images or e-commerce product photos with our advanced AI tool.",
-      "icon": "Image",
-      "link": "image"
-    },
-    {
-      "id": 2,
-      "name": "Bulk Image Processor",
-      "description": "Process multiple images at once to save time. Perfect for e-commerce stores with large product catalogs.",
-      "icon": "Images",
-      "link": "bulk"
-    },
-    {
-        "id": 3,
-        "name": "Ai Image Generator",
-        "description": "Generate compelling descriptions for your social media images or e-commerce product photos with our advanced AI tool.",
-        "icon": "Image",
-        "link": "imageGenerator"
-       
-      }
-  ];
+    const Tools = [
+        {
+          "id": 1,
+          "name": "AI Image Description",
+          "description": "Generate compelling descriptions for your social media images or e-commerce product photos with our advanced AI tool.",
+          "icon": "Image",
+          "link": "image"
+        },
+        {
+          "id": 2,
+          "name": "Bulk Image Processor",
+          "description": "Process multiple images at once to save time. Perfect for e-commerce stores with large product catalogs.",
+          "icon": "Images",
+          "link": "bulk"
+        },
+        {
+          "id": 3,
+          "name": "AI Image Generator",
+          "description": "Generate compelling descriptions for your social media images or e-commerce product photos with our advanced AI tool.",
+          "icon": "Image",
+          "link": "imageGenerator"
+        },
+        {
+          "id": 4,
+          "name": "AI Hashtags Generator",
+          "description": "Generate trending and relevant hashtags for your social media posts to increase reach and engagement.",
+          "icon": "Hashtag",
+          "link": "hastags"
+        }
+      ];
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen  p-8">
